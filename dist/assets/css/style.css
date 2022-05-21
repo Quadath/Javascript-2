@@ -941,6 +941,7 @@ textarea:focus {
     width: 110px;
     height: 70px;
     cursor: pointer;
+    transition: .4s all;
   }
 
 .popup_calc_close {
@@ -1749,6 +1750,7 @@ textarea:focus {
   }
 
   .popup_calc_content .balcon_icons img {
+    transition: .4s all;
     width: 20%;
   }
 

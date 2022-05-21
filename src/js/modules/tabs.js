@@ -1,23 +1,37 @@
-const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display = 'block') => {
     const header = document.querySelector(headerSelector),
         tab = document.querySelectorAll(tabSelector),
         content = document.querySelectorAll(contentSelector);
 
-    hideTabContent = () => {
+    function hideTabContent() {
         content.forEach(item => {
             item.style.display = 'none';
         });
-        tab.foreach(item => {
+        tab.forEach(item => {
             item.classList.remove(activeClass);
         });
     }
 
-    showTabContent = (i = 0) => {
-        content[i].style.display = 'block';
+    function showTabContent(i = 0) {
+        content[i].style.display = display;
         tab[i].classList.add(activeClass);
     }
     hideTabContent();
     showTabContent();
+
+    header.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target &&
+            (target.classList.contains(tabSelector.replace(/\./,"")) || 
+        target.parentNode.classList.contains(tabSelector.replace(/\./,"")))) {
+            tab.forEach((item, index) => {
+                if (target === item || target.parentNode == item) {
+                    hideTabContent();
+                    showTabContent(index);
+                } 
+            })   
+        }
+    });
 }
 
 export default tabs;
